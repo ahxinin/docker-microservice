@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  rmqnamesrv:
+    image: apache/rocketmq:4.9.7
+    container_name: rmqnamesrv
+    ports:
+      - 9876:9876
+    volumes:
+      - ./rmqnamesrv/logs:/home/rocketmq/logs
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"  
+    command: sh mqnamesrv
+
+  broker:
+    image: apache/rocketmq:4.9.7
+    container_name: rmqbroker
+    ports:
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    volumes:
+      - ./rmqbroker/logs:/home/rocketmq/logs
+      - ./rmqbroker/store:/home/rocketmq/store
+      - ./config/rmqbroker/conf/broker.conf:/home/rocketmq/rocketmq-4.9.7/conf/broker.conf
+    links:
+      - rmqnamesrv:namesrv
+    environment:
+      NAMESRV_ADDR: namesrv:9876
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
+    command: sh mqbroker -c ../conf/broker.conf
+
+  rmqdashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: ${ENV_NAME}-rocketmq-dashboard
+    ports:
+      - 8080:8080
+    volumes:
+      - ./config/rocketmq-dashboard/data:/tmp/rocketmq-console/data  
+    environment:
+      NAMESRV_ADDR: namesrv:9876
+      ROCKETMQ_CONFIG_LOGIN_REQUIRED: true
+    links:
+      - rmqnamesrv:namesrv
