@@ -1,0 +1,4 @@
+
+*.log
+*.json
+rmqbroker/store

@@ -32,7 +32,7 @@ services:
 
   rmqdashboard:
     image: apacherocketmq/rocketmq-dashboard:latest
-    container_name: ${ENV_NAME}-rocketmq-dashboard
+    container_name: rocketmq-dashboard
     ports:
       - 8080:8080
     volumes:

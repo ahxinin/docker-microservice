@@ -10,4 +10,4 @@ chmod -R 777 ./rmqnamesrv
 chmod -R 777 ./rmqbroker
 
 # 启动容器
-docker-compose up -d
+docker compose up -d
