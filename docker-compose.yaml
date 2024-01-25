@@ -12,7 +12,7 @@ services:
       JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"  
     command: sh mqnamesrv
 
-  broker:
+  rmqbroker:
     image: apache/rocketmq:4.9.7
     container_name: rmqbroker
     ports:
@@ -22,7 +22,7 @@ services:
     volumes:
       - ./rmqbroker/logs:/home/rocketmq/logs
       - ./rmqbroker/store:/home/rocketmq/store
-      - ./config/rmqbroker/conf/broker.conf:/home/rocketmq/rocketmq-4.9.7/conf/broker.conf
+      - ./rmqbroker/conf/broker.conf:/home/rocketmq/rocketmq-4.9.7/conf/broker.conf
     links:
       - rmqnamesrv:namesrv
     environment:
@@ -36,9 +36,21 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./config/rocketmq-dashboard/data:/tmp/rocketmq-console/data  
+      - ./rmqdashboard/data:/tmp/rocketmq-console/data  
     environment:
       NAMESRV_ADDR: namesrv:9876
       ROCKETMQ_CONFIG_LOGIN_REQUIRED: true
     links:
       - rmqnamesrv:namesrv
+
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d

@@ -2,12 +2,16 @@
 
 # 创建目录
 mkdir -p ./rmqnamesrv/logs
+
 mkdir -p ./rmqbroker/logs
 mkdir -p ./rmqbroker/store
 
+mkdir -p ./mysql/data
+
 # 设置目录权限
-chmod -R 777 ./rmqnamesrv
+chmod -R 777 ./rmqnamesrv/logs
 chmod -R 777 ./rmqbroker
+chmod -R 777 ./mysql/data
 
 # 启动容器
 docker compose up -d
