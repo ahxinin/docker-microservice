@@ -2,3 +2,6 @@
 *.log
 *.json
 rmqbroker/store
+mysql/data
+redis/data
+nacos/logs
