@@ -58,6 +58,11 @@ http://localhost:8848/nacos  (nacos/nacos)
 #### 4.4.Redis
 localhost:6379 (123456)
 
+### 5.安全
+- 服务器运维管理面板：[1Panel](https://1panel.cn/)
+- UFW(Ubuntu上的防火墙)无法进行有效阻止 docker 暴露的端口问题，推荐使用：[ufw-docker](https://github.com/chaifeng/ufw-docker)
+- Web应用防火墙，[雷池WAF](https://waf-ce.chaitin.cn/docs/)
+
 ### 参考文档
 - https://github.com/apache/rocketmq-docker
 - https://github.com/apache/rocketmq-dashboard
