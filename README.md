@@ -27,11 +27,11 @@ sudo systemctl restart docker
 ```
 
 #### 2.3.设置Clash代理
-将Clash配置文件拷贝到指定路径
+将Clash配置文件拷贝到/home/ubuntu/airport.yaml
 ```
 sudo docker pull dreamacro/clash
 
-sudo docker run -d --name=clash -v "/home/ubuntu/dollarAirport.yaml:/root/.config/clash/config.yaml" -p "7890:7890" -p "9090:9090" --restart=unless-stopped dreamacro/clash
+sudo docker run -d --name=clash -v "/home/ubuntu/airport.yaml:/root/.config/clash/config.yaml" -p "7890:7890" -p "9090:9090" --restart=unless-stopped dreamacro/clash
 ```
 #### 2.4.Git使用代理
 ```
