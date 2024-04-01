@@ -52,10 +52,10 @@ services:
     container_name: mysql
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_USER=nacos
-      - MYSQL_PASSWORD=nacos
-      - MYSQL_DATABASE=nacos_server
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=¥MYSQL_DATABASE
     ports:
       - 3306:3306
     volumes:
@@ -87,7 +87,9 @@ services:
     image: redis:6.2.6
     container_name: redis
     restart: unless-stopped
-    command: '--requirepass 123456'
+    command: '--requirepass $REDIS_PASSWORD'
+    environment:
+      - REDIS_PASSWORD=$REDIS_PASSWORD
     volumes:
       - ./redis/data:/data
     ports:
