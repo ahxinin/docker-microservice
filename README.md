@@ -8,7 +8,7 @@
 ### 2.准备工作
 #### 2.1.安装Docker
 ```
-curl -fsSL https://get.docker.com | bash -s docker --mirror AzureChinaCloud
+sudo apt-get install docker.io
 ```
 #### 2.2.配置镜像源
 ```
@@ -27,11 +27,11 @@ sudo systemctl restart docker
 ```
 
 #### 2.3.设置Clash代理
-将Clash配置文件拷贝到/home/ubuntu/airport.yaml
+将Clash配置文件拷贝到/home/ubuntu/config.yaml
 ```
 sudo docker pull dreamacro/clash
 
-sudo docker run -d --name=clash -v "/home/ubuntu/airport.yaml:/root/.config/clash/config.yaml" -p "7890:7890" -p "9090:9090" --restart=unless-stopped dreamacro/clash
+sudo docker run -d --name=clash -v "/home/ubuntu/config.yaml:/root/.config/clash/config.yaml" -p "7890:7890" -p "9090:9090" --restart=unless-stopped dreamacro/clash
 ```
 #### 2.4.Git使用代理
 ```

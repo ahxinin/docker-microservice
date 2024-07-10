@@ -41,7 +41,7 @@ services:
       - ./rmqdashboard/data:/tmp/rocketmq-console/data  
     environment:
       NAMESRV_ADDR: namesrv:9876
-      ROCKETMQ_CONFIG_LOGIN_REQUIRED: true
+      ROCKETMQ_CONFIG_LOGIN_REQUIRED: "true"
     links:
       - rmqnamesrv:namesrv
 
